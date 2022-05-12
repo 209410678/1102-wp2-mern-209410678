@@ -7,11 +7,21 @@ const app = express();
 import dotenv from 'dotenv';
 dotenv.config();
 
+// db and authenticateUser
+
 import connectDB_78 from './db/connect_78.js'
 
+// middleware
+import notFoundMiddleware_78 from './middleware/not-found_78.js';
+import errorHandlerMiddleware_78 from './middleware/error-handler_78.js';
+
 app.get('/',(req, res) => {
+    throw new Error('testing for error');
     res.send('Welcome 鄭芷琳 209410678');
 });
+
+app.use(notFoundMiddleware_78);
+app.use(errorHandlerMiddleware_78);
 
 const port = process.env.PORT || 5000;
 
