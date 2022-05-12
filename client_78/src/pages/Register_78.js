@@ -18,6 +18,10 @@ function Register_78() {
 
     const { showAlert, displayAlert} = useAppContext();
 
+    const toggleMember = () => {
+      setValues( {...values, isMember: !values.isMember} );
+    }
+
     const handleChange = (e) => {
         console.log('e.target', e.target)
         setValues({...values, [e.target.name]: e.target.value });
@@ -37,16 +41,19 @@ function Register_78() {
     <Wrapper>
       <form className="form" onSubmit={onSubmit}>
           <Logo_78 />
-          <h3>Register</h3>
+          <h3> {values.isMember ? 'Login' : 'Register'}</h3>
           {showAlert && <Alert_78 /> }
           {/* name input */}
-          <FormRow_78 
+          {!values.isMember && (
+            <FormRow_78 
             type="text"
             name='name'
             value={values.name}
             handleChange={handleChange}
             className='form-input' 
           />
+          ) }
+          
           {/*email input */}
           <FormRow_78 
             type="email"
@@ -66,6 +73,12 @@ function Register_78() {
           <button className='btn btn-block' type="submit">
               submit
           </button>
+          <p>
+            {values.isMember ? 'Not a member yet?' : 'Already a member?'}
+            <button type='button' className='member-btn' onClick={toggleMember}>
+              {values.isMember ? 'Register' : 'Login'}
+            </button>
+          </p>
       </form>
     </Wrapper>
   )
