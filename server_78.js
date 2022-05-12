@@ -11,14 +11,22 @@ dotenv.config();
 
 import connectDB_78 from './db/connect_78.js'
 
+//routes
+
+import authRoutes_78 from './routes/authRoutes_78.js';
+
 // middleware
 import notFoundMiddleware_78 from './middleware/not-found_78.js';
 import errorHandlerMiddleware_78 from './middleware/error-handler_78.js';
 
+app.use(express.json());
+
 app.get('/',(req, res) => {
-    throw new Error('testing for error');
+    // throw new Error('testing for error');
     res.send('Welcome 鄭芷琳 209410678');
 });
+
+app.use('/api/v1/auth_78', authRoutes_78);
 
 app.use(notFoundMiddleware_78);
 app.use(errorHandlerMiddleware_78);
