@@ -7,9 +7,13 @@ const app = express();
 import dotenv from 'dotenv';
 dotenv.config();
 
+import 'express-async-errors';
+
+import morgan from 'morgan';
+
 // db and authenticateUser
 
-import connectDB_78 from './db/connect_78.js'
+import connectDB_78 from './db/connect_78.js';
 
 //routes
 
@@ -19,11 +23,15 @@ import authRoutes_78 from './routes/authRoutes_78.js';
 import notFoundMiddleware_78 from './middleware/not-found_78.js';
 import errorHandlerMiddleware_78 from './middleware/error-handler_78.js';
 
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
 
-app.get('/',(req, res) => {
-    // throw new Error('testing for error');
-    res.send('Welcome 鄭芷琳 209410678');
+app.get('/', (req, res) => {
+  // throw new Error('testing for error');
+  res.send('Welcome 鄭芷琳 209410678');
 });
 
 app.use('/api/v1/auth_78', authRoutes_78);
@@ -34,16 +42,14 @@ app.use(errorHandlerMiddleware_78);
 const port = process.env.PORT || 5000;
 
 const start = async () => {
-    try{
-        await connectDB_78(process.env.MONGO_LOCAL_URL).then( () => {
-            console.log('Connecting to MongoDB');
-        });
-        app.listen(port, () => console.log(`Server is running on port ${port}`));
-    }catch(err){
-        console.log(err);
-    }
-
-}
+  try {
+    await connectDB_78(process.env.MONGO_LOCAL_URL).then(() => {
+      console.log('Connecting to MongoDB');
+    });
+    app.listen(port, () => console.log(`Server is running on port ${port}`));
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 start();
-

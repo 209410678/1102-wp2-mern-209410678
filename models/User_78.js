@@ -48,7 +48,9 @@ UserSchema_78.pre('save', async function () {
 
 UserSchema_78.methods.createJWT = function () {
   //console.log('this', this);
-  return jwt.sign({ userId: this._id }, 'jwtsecret', { expiresIn: '1d' });
+  return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
 };
 
 export default mongoose.model('User_78', UserSchema_78);

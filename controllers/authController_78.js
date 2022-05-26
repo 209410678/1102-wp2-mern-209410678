@@ -1,7 +1,12 @@
 import User_78 from '../models/User_78.js';
+import { StatusCodes } from 'http-status-codes';
 
 const register_78 = async (req, res, next) => {
-  try {
+  console.log('body', req.body);
+  const user = await User_78.create(req.body);
+  const token = user.createJWT();
+  res.status(StatusCodes.CREATED).json({ user, token });
+  /*try {
     console.log('body', req.body);
     const user = await User_78.create(req.body);
     const token = user.createJWT();
@@ -11,7 +16,7 @@ const register_78 = async (req, res, next) => {
     next(err);
   }
 
-  //res.send('register user -- 鄭芷琳, 209410678');
+  //res.send('register user -- 鄭芷琳, 209410678');*/
 };
 
 const login_78 = async (req, res) => {
