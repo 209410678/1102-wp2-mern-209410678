@@ -5,7 +5,9 @@
   "main": "server_78.js",
   "type": "module",
   "scripts": {
-    "start": "node server_78.js",
+    "server": "nodemon server_78.js --ignore client_78",
+    "client": "npm start --prefix client_78",
+    "start": "concurrently --kill-others-on-fail \" npm run server \" \" npm run client \" ",
     "dev": "nodemon server_78.js"
   },
   "repository": {
