@@ -23,6 +23,8 @@
   "homepage": "https://github.com/209410678/1102-wp2-mern-209410678#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^7.2.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
