@@ -1,9 +1,5 @@
 function Dashboard_78() {
-  return (
-    <div>
-      Dashboard
-    </div>
-  )
+  return <div>Dashboard</div>;
 }
 
-export default Dashboard_78
+export default Dashboard_78;
